@@ -15,6 +15,9 @@ jobs:
           fetch-depth: 0
 
       - name: Sync to Gitee
+        env:
+          GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
         run: |
-          git push --force --all https://${{ secrets.GITEE_USERNAME }}:${{ secrets.GITEE_PASSWORD }}@gitee.com/${{ secrets.GITEE_USERNAME }}/FinAgent.git
-          git push --force --tags https://${{ secrets.GITEE_USERNAME }}:${{ secrets.GITEE_PASSWORD }}@gitee.com/${{ secrets.GITEE_USERNAME }}/FinAgent.git
+          git remote add gitee https://oauth2:${GITEE_TOKEN}@gitee.com/luzhangchi/FinAgent.git
+          git push --force --all gitee
+          git push --force --tags gitee
